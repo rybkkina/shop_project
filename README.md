@@ -1,12 +1,12 @@
 # Shop website
 This is a shop website where users can easily find products they want, add them to cart, change quantity of the products they chose, make orders, but these actions are available only for authorized users (when a user wants to add a product to cart, he is being redirected to the registration page and then to the login page). The following images represent registration page, login page, the main page of the site, and the cart:
-![Home page](/home/masha/PycharmProjects/shop/myshop/README_photos/Знімок екрана з 2024-01-31 22-31-45.png)
+![Home page](./README_photos/Знімок екрана з 2024-01-31 22-31-45.png)
 Home page
-![](/home/masha/PycharmProjects/shop/myshop/README_photos/Знімок екрана з 2024-01-31 22-35-33.png)
+![](./README_photos/Знімок екрана з 2024-01-31 22-35-33.png)
 Login form
-![Checkout](/home/masha/PycharmProjects/shop/myshop/README_photos/Знімок екрана з 2024-01-31 22-42-54.png)
+![Checkout](./README_photos/Знімок екрана з 2024-01-31 22-42-54.png)
 Checkout
-![Payment](/home/masha/PycharmProjects/shop/myshop/README_photos/Знімок екрана з 2024-01-31 22-45-39.png)
+![Payment](./README_photos/Знімок екрана з 2024-01-31 22-45-39.png)
 Payment process
 #### Technologies used: 
 * Django Framework 
