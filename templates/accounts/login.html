@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+{% block content %}
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+    <ul>
+      <form action="{% url "accounts:register" %} "method='post'>
+          {% csrf_token %}
+          <button type="submit">REGISTER</button>
+      </form>
+    <ul/>
+{% endblock %}
+</body>
+</html>
