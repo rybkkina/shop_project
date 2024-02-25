@@ -9,12 +9,16 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
+import sys
 from pathlib import Path
 import django.contrib.messages.context_processors
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR / 'myshop'))
+
+PROJECT_ROOT = BASE_DIR.parent / 'myshop'
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +31,6 @@ SECRET_KEY = 'django-insecure-jnr=stk+v21tko)4oc^^5k+n99f05*(ft6g+0by-+frb0nt@h5
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -79,7 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myshop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -87,11 +89,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -111,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -123,7 +123,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -131,8 +130,6 @@ STATIC_URL = 'static/'
 
 CANCELLED_PAYMENT_URL = 'http://127.0.0.1:8000/payment/canceled/'
 SUCCESS_PAYMENT_URL = 'http://127.0.0.1:8000/payment/completed/'
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -144,8 +141,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 CART_SESSION_ID = 'cart'
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51NYTEOBuSLeXPfNQGhvyk0GmMVAwZ04YFpYuXGqXMwbDDlmVIRcE7ObNgpmuTSUPY7AOGLcXlfbJsWuJgyXQmYLb00zYJNrnkx' # Publishable key
-STRIPE_SECRET_KEY = 'sk_test_51NYTEOBuSLeXPfNQsH2io5Ygip2O9JHkFF2cKkOboDcMgPfVzmUHb0em5Cu9uDVw9vKc2S32XJrwZLOND2inXUhp00jB9kdzsq' # Secret key
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51NYTEOBuSLeXPfNQGhvyk0GmMVAwZ04YFpYuXGqXMwbDDlmVIRcE7ObNgpmuTSUPY7AOGLcXlfbJsWuJgyXQmYLb00zYJNrnkx'  # Publishable key
+STRIPE_SECRET_KEY = 'sk_test_51NYTEOBuSLeXPfNQsH2io5Ygip2O9JHkFF2cKkOboDcMgPfVzmUHb0em5Cu9uDVw9vKc2S32XJrwZLOND2inXUhp00jB9kdzsq'  # Secret key
 STRIPE_API_VERSION = '2022-08-01'
 STRIPE_WEBHOOK_SECRET = 'whsec_3dce4468b888959b17e9932bff2d3713e399bf4c90f20939f1575f8eb5de277e'
 
@@ -154,3 +151,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication'
     ]
 }
+
+
