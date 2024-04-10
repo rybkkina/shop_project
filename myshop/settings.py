@@ -20,7 +20,6 @@ sys.path.append(str(BASE_DIR / 'myshop'))
 
 PROJECT_ROOT = BASE_DIR.parent / 'myshop'
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -30,7 +29,7 @@ SECRET_KEY = 'django-insecure-jnr=stk+v21tko)4oc^^5k+n99f05*(ft6g+0by-+frb0nt@h5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split()
 
 # Application definition
 
@@ -89,6 +88,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'myshop',
+        # 'USER': 'test',
+        # 'PASSWORD': 'test',
+        # 'HOST': 'db',
+        # 'PORT': 5432,
     },
 }
 
@@ -151,5 +156,3 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication'
     ]
 }
-
-

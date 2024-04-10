@@ -1,0 +1,77 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/myshop
+    ports:
+      - "8001:8000"
+    environment:
+      - DEBUG=1
+      - SECRET_KEY='django-insecure-jnr=stk+v21tko)4oc^^5k+n99f05*(ft6g+0by-+frb0nt@h5'
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - CELERY_BROKER_URL=amqp://root:root@rabbitmq:5672//
+      - CELERY_RESULT_BACKEND=rpc://
+    depends_on:
+      - db
+      - rabbitmq
+    networks:
+      - app-network
+
+  db:
+    image: postgres:16.2
+    restart: always
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=myshop
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "15673:15672"
+      - "5673:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    networks:
+      - app-network
+
+  celery_worker:
+      build: .
+      command: celery -A myshop worker --loglevel=info
+      volumes:
+        - .:/myshop
+      depends_on:
+        - web
+        - rabbitmq
+      environment:
+        - DJANGO_SETTINGS_MODULE=myshop.settings
+        - CELERY_BROKER_URL=amqp://root:root@rabbitmq:5672//
+        - CELERY_RESULT_BACKEND=rpc://
+      networks:
+        - app-network
+
+  celery_beat:
+      build: .
+      command: celery -A myshop beat --loglevel=info
+      volumes:
+        - .:/myshop
+      depends_on:
+        - web
+        - rabbitmq
+      environment:
+        - DJANGO_SETTINGS_MODULE=myshop.settings
+        - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+        - CELERY_RESULT_BACKEND=rpc://
+      networks:
+        - app-network
+
+networks:
+  app-network:

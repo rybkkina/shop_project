@@ -17,3 +17,4 @@ class LoginService:
         if not user:
             raise Exception("There's no such a user")
         return user
+
